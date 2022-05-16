@@ -7,7 +7,7 @@ Lưu ý: module hiện tại chỉ hỗ trợ phiên bản nukeviet 4.5 trở đ
 # Thư viện aplay.js
 	<link href="/{NV_ASSETS_DIR}/css/aplayer/APlayer.min.css" rel="stylesheet">
 	<script src="/{NV_ASSETS_DIR}/js/aplayer/APlayer.min.js" type="text/javascript"></script>
-# thêm dòng code hiển thị dưới title hoặc ở đâu bạn muốn
+# Thêm dòng code hiển thị dưới title hoặc ở đâu bạn muốn
 	<div id="myplayer" class="aplayer"></div>
 
 # Thêm đoạn hiển thị script chân trang
