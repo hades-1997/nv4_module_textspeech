@@ -26,6 +26,8 @@ if ($nv_Request->isset_request('submit', 'post')) {
 	
 	$array_config['voice'] = $nv_Request->get_string('voice', 'post', '');
 	$array_config['speed'] = $nv_Request->get_string('speed', 'post', '');
+	$array_config['token'] = $nv_Request->get_string('token', 'post', '');
+
     $array_config['viewtype'] = $nv_Request->get_int('viewtype', 'post', 0);
     $array_config['facebookapi'] = $nv_Request->get_string('facebookapi', 'post', '');
     $array_config['per_page'] = $nv_Request->get_int('per_page', 'post', '0');
@@ -41,6 +43,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
     $array_config['socialbutton'] = !empty($array_config['socialbutton']) ? implode(',', $array_config['socialbutton']) : '';
 
     $sth = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_config SET config_value = :config_value WHERE config_name = :config_name');
+    	
     foreach ($array_config as $config_name => $config_value) {
         $sth->bindParam(':config_name', $config_name, PDO::PARAM_STR);
         $sth->bindParam(':config_value', $config_value, PDO::PARAM_STR);
@@ -54,6 +57,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
 $array_config['viewtype'] = 0;
 $array_config['voice'] = '';
 $array_config['speed'] = 1;
+$array_config['token'] = '';
 $array_config['facebookapi'] = '';
 $array_config['socialbutton'] = '';
 $array_config['per_page'] = '5';
@@ -64,6 +68,7 @@ $array_config['alias_lower'] = 1;
 
 $sql = 'SELECT config_name, config_value FROM ' . NV_PREFIXLANG . '_' . $module_data . '_config';
 $result = $db->query($sql);
+
 while (list($c_config_name, $c_config_value) = $result->fetch(3)) {
     $array_config[$c_config_name] = $c_config_value;
 }
@@ -76,6 +81,8 @@ $xtpl->assign('DATA', $array_config);
 $xtpl->assign('NEWS_FIRST', $array_config['news_first'] ? ' checked="checked"' : '');
 $xtpl->assign('COPY_PAGE', $array_config['copy_page'] ? ' checked="checked"' : '');
 $xtpl->assign('ALIAS_LOWER', $array_config['alias_lower'] ? ' checked="checked"' : '');
+
+
 
 $view_array = [
     $lang_module['config_view_type_0'],
@@ -110,6 +117,8 @@ foreach ($array_speed as $key => $title){
     ]);
 	 $xtpl->parse('main.speed');
 }
+
+
 
 for ($i = 5; $i <= 30; ++$i) {
     $xtpl->assign('PER_PAGE', [

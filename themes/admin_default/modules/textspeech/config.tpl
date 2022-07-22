@@ -38,7 +38,10 @@
 								</div>
                         </td>
                     </tr>
-					
+					<tr>
+						<td>{LANG.token}</td>
+						<td><input class="form-control w200" name="token" value="{DATA.token}" /><span class="help-block">{LANG.config_tokenviettel_note}</span></td>
+					</tr>
 					<tr>
 						<td>{LANG.config_facebookapi}</td>
 						<td><input class="form-control w200" name="facebookapi" value="{DATA.facebookapi}" /><span class="help-block">{LANG.config_facebookapi_note}</span></td>

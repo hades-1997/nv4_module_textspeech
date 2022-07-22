@@ -18,7 +18,7 @@ $catid = $nv_Request->get_int('catid', 'get', 0);
 $per_page_old = $nv_Request->get_int('per_page', 'cookie', 50);
 $per_page = $nv_Request->get_int('per_page', 'get', $per_page_old);
 $num_items = $nv_Request->get_int('num_items', 'get', 0);
-
+$order = $nv_Request->get_string('order', 'get') == 'asc' ? 'asc' : 'desc';
 
 
 if ($per_page < 1 or $per_page > 500) {
@@ -37,6 +37,8 @@ $where = '';
 $page = $nv_Request->get_int('page', 'get', 1);
 $checkss = $nv_Request->get_string('checkss', 'get', '');
 $check_declined = false;
+$ordername = 'id';
+
 //------------------------------
 // Viết code xử lý chung vào đây
 //------------------------------
@@ -80,7 +82,8 @@ $check_declined = false;
 
 		
 	$db_slave->select('r.id, r.catid, r.listcatid, r.admin_id, r.title, r.alias, r.status, r.weight, r.publtime, r.exptime, r.hitstotal, r.hitscm, r.admin_id, r.author')
-        ->limit($per_page)
+        ->order('r.id ' . $order)
+		->limit($per_page)
         ->offset(($page - 1) * $per_page);
     $result = $db_slave->query($db_slave->sql());
 	
@@ -169,7 +172,7 @@ $check_declined = false;
         $array_userid[$_userid] = $_userid;
     }
 
-
+$order2 = ($order == 'asc') ? 'desc' : 'asc';
 $array_list_action = [
     'audio_export' => $lang_module['audio_export'],
     'delete' =>  $lang_global['delete'],
@@ -218,6 +221,15 @@ if (!empty($array_userid)) {
         ];
     }
 }
+$base_url_id = $base_url_mod . '&amp;ordername=id&amp;order=' . $order2 . '&amp;page=' . $page;
+$base_url_name = $base_url_mod . '&amp;ordername=title&amp;order=' . $order2 . '&amp;page=' . $page;
+$base_url_publtime = $base_url_mod . '&amp;ordername=publtime&amp;order=' . $order2 . '&amp;page=' . $page;
+$base_url_exptime = $base_url_mod . '&amp;ordername=exptime&amp;order=' . $order2 . '&amp;page=' . $page;
+$base_url_hitstotal = $base_url_mod . '&amp;ordername=hitstotal&amp;order=' . $order2 . '&amp;page=' . $page;
+$base_url_hitscm = $base_url_mod . '&amp;ordername=hitscm&amp;order=' . $order2 . '&amp;page=' . $page;
+$base_url = $base_url_mod . '&amp;sstatus=' . $sstatus . '&amp;ordername=' . $ordername . '&amp;order=' . $order;
+$generate_page = nv_generate_page($base_url, $num_items, $per_page, $page);
+
 $xtpl = new XTemplate('main.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
 $xtpl->assign('LANG', $lang_module);
 $xtpl->assign('GLANG', $lang_global);

@@ -61,8 +61,8 @@ if($nv_Request->isset_request('checkss', 'get') and $nv_Request->get_string('che
 			'timeout' => 60000
 		 ];
 		 $test = json_encode($params);
-		 
 		 $curl = curl_init();
+		 $TOKEN = ($array_config['token']);
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => 'https://viettelgroup.ai/voice/api/tts/v1/rest/syn',
 			CURLOPT_RETURNTRANSFER => true,
@@ -78,7 +78,7 @@ if($nv_Request->isset_request('checkss', 'get') and $nv_Request->get_string('che
 				'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
 				'sec-ch-ua-mobile: ?0',
 				'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
-				'token: ',
+				'token:'.$TOKEN,
 				'Content-Type: application/json',
 				'Accept: */*',
 				'Origin: https://viettelgroup.ai',
@@ -91,21 +91,28 @@ if($nv_Request->isset_request('checkss', 'get') and $nv_Request->get_string('che
 		));
 		$response = curl_exec($curl);
 		// Xác định và tạo các thư mục upload
+		
 		if ($response) {
 			
 			$name_audio = 'audio_'.$row['id'].'.mp3';
 			$file_dir = NV_UPLOADS_REAL_DIR .'/' . $module_upload.'/audio_'.$row['id'].'.mp3';
 			
 			file_put_contents($file_dir, $response);
+			
 			$meta_key = 'tts_audio_';
+			
 			$ct_query = [];
 			
-			$sth = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_news_detail SET
+			$sth = $db->prepare('UPDATE '. NV_PREFIXLANG .'_news_detail SET
 				audio=:audio
 			WHERE id =' .$row['id']);
+			
+			
 			 $sth->bindParam(':audio', $name_audio , PDO::PARAM_STR);
 			 
 			$ct_query[] = (int) $sth->execute();
+			
+			
 		}
 	}
 }

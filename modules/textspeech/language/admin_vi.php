@@ -20,6 +20,7 @@ $lang_translator['langtype'] = 'lang_module';
 $lang_module['main'] = 'Trang chính';
 $lang_module['voice'] = 'Giọng nói';
 $lang_module['speed'] = 'Tốc độ phát';
+$lang_module['token'] = 'Token Viettel';
 $lang_module['config'] = 'Cấu hình';
 $lang_module['save'] = 'Lưu lại';
 $lang_module['title'] = 'Tiêu Đề';
@@ -110,6 +111,7 @@ $lang_module['config_view_type_page'] = 'Số bài viết hiển thị trên m�
 $lang_module['config_view_related_articles'] = 'Số bài viết liên quan';
 $lang_module['config_facebookapi'] = 'Facebook App ID';
 $lang_module['config_facebookapi_note'] = ' (Có dạng 1419186468293063, <a href="http://wiki.nukeviet.vn/nukeviet:admin:news:facebookapi" target="_blank">xem chi tiết</a>)';
+$lang_module['config_tokenviettel_note'] = ' (Có dạng 2Y5yc6ZTG-7HaDvWRF0N-gA5aVjGs9OIt6veR9PoegEqhQc1djK9U6kfeoIey..., <a href="https://viettelgroup.ai/dashboard/token" target="_blank">xem chi tiết</a>)';
 $lang_module['config_alias_lower'] = 'Chuyển liên kết tĩnh về chữ thường';
 $lang_module['config_save'] = 'Lưu cấu hình';
 

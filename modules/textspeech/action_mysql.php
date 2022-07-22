@@ -47,6 +47,7 @@ $sql_create_module[] = 'INSERT INTO ' . $db_config['prefix'] . '_' . $lang . '_'
 ('facebookapi', ''),
 ('voice', ''),
 ('speed', 1),
+('token', ''),
 ('per_page', '20'),
 ('news_first', '0'),
 ('related_articles', '5'),
